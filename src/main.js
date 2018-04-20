@@ -15,13 +15,26 @@ Vue.component('Calculator', {
       number2: 0
     }
   },
+  methods: {
+    calculate: function (a, b, c) {
+      if (!isNaN(parseFloat(a)) && !isNaN(parseFloat(b))) {
+        if (c === '+') {
+          this.value = parseFloat(a) + parseFloat(b)
+        } else {
+          this.value = parseFloat(a) - parseFloat(b)
+        }
+      } else {
+        this.value = 'Invalid Input'
+      }
+    }
+  },
   template: `
   <div>
   <input v-model="number1">
   <input v-model="number2">
-  <p>Result is {{value}} <p>
-  <button v-on:click="value=parseInt(number1)+parseInt(number2)">+</button>
-  <button v-on:click="value=parseInt(number1)-parseInt(number2)">-</button>
+  <p>Result is {{value}} </p>
+  <button v-on:click="calculate(number1, number2, '+')">+</button>
+  <button v-on:click="calculate(number1, number2, '-')">-</button>
   </div>
   `
 })
